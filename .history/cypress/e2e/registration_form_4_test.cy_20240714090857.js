@@ -55,7 +55,7 @@ describe("Input fields", () => {
   it("User cannot submit empty registration form", () => {
     // Do not add any information
     // Check that submit button is not enabled
-    cy.get(".submit_button").should("not.be.enabled");
+    cy.get(".submit_button").should("be.disabled");
   });
 
   it("BMW should not be listed in the list of the cars", () => {
