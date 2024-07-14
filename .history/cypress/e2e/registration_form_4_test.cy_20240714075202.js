@@ -13,29 +13,27 @@ describe("Input fields", () => {
     cy.get("#success_message").should("not.be.visible");
   });
 
-  it("Username tooltip is visible", () => {
-    cy.get("#username").type("{enter}");
+  it.only("Username tooltip is visible", () => {
+    cy.get("#username").clear();
     cy.get("h2").contains("Password").click();
     cy.get("#username")
       .should("have.attr", "title")
-      .should("contain", "Please add username");
+      .should("contain", "Please add username")
+      .and("be.visible");
 
     //if not entered, mandatory username field has red border outline
     cy.get("#username")
       .should("have.css", "box-shadow")
       .should("contain", "rgb(255, 0, 0)");
   });
-
   it("Username should have min and max length values 1 and 50 characters", () => {
     cy.get("#username").should("have.attr", "min", "1");
     cy.get("#username").should("have.attr", "max", "50");
   });
-
   it("Username should support only letters and numbers", () => {
     // check with regex supporter format
     cy.get("#username").should("have.attr", "pattern", "[a-zA-Z0-9_]+");
   });
-
   it("Email input should support correct pattern", () => {
     // Check regex
     // input invalid email
@@ -57,6 +55,9 @@ describe("Input fields", () => {
     // Check that submit button is not enabled
     cy.get(".submit_button").should("be.disabled");
     cy.get("h2").contains("Password").click();
+    cy.get("#input_error_message")
+      .should("be.visible")
+      .and("contain", "Mandatory input field is not valid or empty!");
     cy.get("#success_message").should("not.be.visible");
   });
 

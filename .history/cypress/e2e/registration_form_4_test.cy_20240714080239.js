@@ -52,7 +52,7 @@ describe("Input fields", () => {
     cy.get(".submit_button").should("not.be.enabled");
   });
 
-  it("User cannot submit empty registration form", () => {
+  it.only("User cannot submit empty registration form", () => {
     // Do not add any information
     // Check that submit button is not enabled
     cy.get(".submit_button").should("be.disabled");

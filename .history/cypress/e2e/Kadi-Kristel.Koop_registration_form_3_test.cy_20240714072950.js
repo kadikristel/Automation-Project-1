@@ -100,10 +100,6 @@ describe("Bonus section: Visual tests, created by: Kadi-Kristel", () => {
     cy.get('#emailAlert span[ng-show="myForm.email.$error.email"]')
       .should("be.visible")
       .and("contain", "Invalid email address");
-<<<<<<< HEAD
-    cy.get('input[type="submit"]').should("be.disabled");
-=======
->>>>>>> 9b06ef2 (Updated registration forms)
     cy.get('input[name="email"]').clear();
     cy.get('input[name="email"]').type("kadi@test.com");
     cy.get('#emailAlert span[ng-show="myForm.email.$error.email"]').should(
@@ -210,13 +206,7 @@ function inputEmptyMandatoryFields() {
 
   cy.get('input[ng-model="checkbox"]').uncheck();
 
-<<<<<<< HEAD
-  cy.contains("#checkboxAlert", "Checkbox is required").should(
-    "not.be.visible"
-  );
-=======
-  cy.get("#checkboxAlert").should("not.be.visible");
->>>>>>> 9b06ef2 (Updated registration forms)
+  cy.contains("#checkboxAlert").should("not.be.visible");
 
   cy.get('input[type="checkbox"]').eq(1).should("not.be.checked");
 

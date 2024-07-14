@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Cypress advanced registration from</title>
+</head>
+<body>
+<h1>Registration form number 2</h1>
+<nav>
+    <a href="registration_form_1.html">Registration form 1</a>
+    <a href="registration_form_3.html">Registration form 3</a>
+</nav>
+<div>
+    <div>
+        <p id="top">This is more advanced registration form, some parts are reused from form 1</p>
+    </div>
+</div>
+<p>This is <span>simple</span> registration form</p>
+<img id="logo" src="cerebrum_hub_logo.png" width="178" height="166" alt="cerebrum_hub_logo">
+<img data-cy="cypress_logo" src="cypress_logo.png" width="116" height="88" alt="cerebrum_hub_logo">
+
+<!--Table-->
+<table>
+    <thead>
+    <tr class="tableRow">
+        <th scope="col">Company Name</th>
+        <th scope="col">Company Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="tableRow">
+        <td rowspan="1">Company number 1</td>
+        <td rowspan="1">The best company</td>
+    </tr>
+    <tr class="tableRow">
+        <td rowspan="1">Another company nr 2</td>
+        <td rowspan="1">Competitor of best company</td>
+    </tr>
+    </tbody>
+</table>
+
+<!--List-->
+<ul>
+    <li class="listRow">Item one</li>
+    <li class="listRow">Item two</li>
+    <li class="listRow">Item three
+        <ul>
+            <li class="listRow">Item 3.1</li>
+            <li class="listRow">Item 3.2</li>
+        </ul>
+</ul>
+
+<form id="applicationForm">
+    <h2 data-testid="userInput">Input username</h2>
+    <p>Username string should consist only of alphabetic and numeric characters</p>
+    <label for="username">Username:</label>
+
+    <!--Max length and placeholder-->
+    <input data-testid="user" class="input" type="text" id="username" name="username" placeholder="John01" min="1" max="50"
+           required
+           onChange="checkInputPattern('username')" pattern='[a-zA-Z0-9_]+' title="Please add username">
+    <h3>Input email</h3>
+    <label for="email">Email:</label>
+    <input type="email" id="email" class="input" name="email" placeholder="aurevoir@ipanema.ee" maxlength="50"
+           onchange="checkInputPattern('email')"
+           pattern="[a-z0-9]+@[a-z0-9]+\.[a-z]{2,4}$"
+           required title="Add email">
+
+    <h2>First name</h2>
+    <p>Please enter your first name</p>
+    <input class="input" type="text" data-cy="name" name="name" placeholder="John" min="1" max="50"
+           onChange="checkInputPattern('name')" pattern='[a-zA-Z]+' required title="Add first name">
+
+    <h2>Last name</h2>
+    <p>Please enter your last name</p>
+    <label for="lastName">Last name:</label>
+    <input class="input" type="text" data-testid="lastNameTestId" id="lastName" name="lastName" placeholder="Smith" min="1" max="30"
+           onChange="checkInputPattern('lastName')" pattern='[a-zA-Z]+' required title="Add last name">
+
+    <h2>Phone number</h2>
+    <p>Only numeric data can be used</p>
+    <input class="input" type="number" data-testid="phoneNumberTestId" placeholder="8775048423"
+           maxlength="10" required title="Add phone number">
+
+    <!--Anchor tag to page top-->
+    <a href="#top">top</a>
+
+    <!--Radio button section-->
+    <h2>Please select your favorite Web language:</h2>
+    <p>Not mandatory field</p>
+    <input type="radio" id="htmlFavLanguage" name="fav_language" value="HTML">
+    <label for="htmlFavLanguage">HTML</label><br>
+    <input type="radio" id="cssFavLanguage" name="fav_language" value="CSS">
+    <label for="cssFavLanguage">CSS</label><br>
+    <input type="radio" id="javascriptFavLanguage" name="fav_language" value="JavaScript">
+    <label for="javascriptFavLanguage">JavaScript</label>
+    <input type="radio" id="phpFavLanguage" name="fav_language" value="php">
+    <label for="phpFavLanguage">PHP</label>
+
+    <!--Checkboxes section-->
+    <h2>Your favourite transport</h2>
+    <p>Not mandatory field</p>
+    <input class="checkbox vehicles" type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+    <label for="vehicle1">I have a bike</label><br>
+    <input class="checkbox vehicles" type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+    <label for="vehicle2">I have a car</label><br>
+    <input class="checkbox vehicles" type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+    <label for="vehicle3">I have a boat</label><br><br>
+
+    <h2>Select a car</h2>
+    <p>This section is simply to check functionality, simply chose one brand from the list</p>
+    <label for="cars">Choose a car:</label>
+    <select name="cars" id="cars">
+        <option value="volvo">Volvo</option>
+        <option value="saab">Saab</option>
+        <option value="opel">Opel</option>
+        <option value="audi">Audi</option>
+    </select>
+
+    <h2>Select your favourite animal</h2>
+    <select name="animal" id="animal">
+        <option value="dog">Dog</option>
+        <option value="cat">Cat</option>
+        <option value="snake">Snake</option>
+        <option value="hippo">Hippo</option>
+        <option value="cow">Cow</option>
+        <option value="mouse">Horse</option>
+    </select>
+    <br><br>
+
+    <h2>Password section</h2>
+    <p>NB! Passwords should match</p>
+    <!--    Will also check that both passwords are similar-->
+    <label>Password:
+        <input id="password" name="password" type="password" placeholder="Qwerty"/> </label><br/>
+    <label>Confirm:
+        <input name="confirm" id="confirm" type="password" onChange="passwordConfirmation()" placeholder="Qwerty"/> </label><br/>
+    <!--    Submit button, as part of form section - part of passwords validation as well-->
+    <button class="submit_button" onclick="successMessage()">Submit</button>
+    <p id="password_error_message" class="error_message">
+        Passwords do not match!
+    </p>
+    <p id="input_error_message" class="error_message">
+        Mandatory input field is not valid or empty!
+    </p>
+    <div id="success_message">
+        <span class="close_button" onclick="this.parentElement.style.display='none';">&times;</span>
+        User successfully submitted registration
+    </div>
+    <script type="text/javascript">
+        function passwordConfirmation() {
+            const password = document.querySelector('input[id=password]');
+            const confirm = document.querySelector('input[id=confirm]');
+            if (confirm.value === password.value) {
+                document.getElementById("password_error_message").style.display = "none"
+                console.log('Checked that passwords have same values - valid')
+            } else {
+                document.getElementById("password_error_message").style.display = "block"
+                confirm.setAttribute('title', 'Both passwords should match')
+                console.log('Passwords are different');
+            }
+        }
+    </script>
+    <script src="registration.js"></script>
+    <link href="registration.css" rel="stylesheet" type="text/css">
+</form>
+</body>
+</html>

@@ -4,7 +4,7 @@ beforeEach(() => {
 
 // Assignment 6: analyze and fix failed test
 describe("Input fields", () => {
-  it("Username cannot be empty string", () => {
+  it.only("Username cannot be empty string", () => {
     cy.get("#username").type(" ");
 
     // in order to activate submit button, user has to click somewhere outside the input field
@@ -25,17 +25,14 @@ describe("Input fields", () => {
       .should("have.css", "box-shadow")
       .should("contain", "rgb(255, 0, 0)");
   });
-
   it("Username should have min and max length values 1 and 50 characters", () => {
     cy.get("#username").should("have.attr", "min", "1");
     cy.get("#username").should("have.attr", "max", "50");
   });
-
   it("Username should support only letters and numbers", () => {
     // check with regex supporter format
     cy.get("#username").should("have.attr", "pattern", "[a-zA-Z0-9_]+");
   });
-
   it("Email input should support correct pattern", () => {
     // Check regex
     // input invalid email
@@ -56,8 +53,9 @@ describe("Input fields", () => {
     // Do not add any information
     // Check that submit button is not enabled
     cy.get(".submit_button").should("be.disabled");
-    cy.get("h2").contains("Password").click();
-    cy.get("#success_message").should("not.be.visible");
+    cy.get("#input_error_message")
+      .should("be.visible")
+      .and("contain", "Mandatory input field is not valid or empty!");
   });
 
   it("BMW should not be listed in the list of the cars", () => {

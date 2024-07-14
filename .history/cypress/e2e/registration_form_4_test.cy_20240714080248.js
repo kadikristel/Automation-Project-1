@@ -60,7 +60,7 @@ describe("Input fields", () => {
     cy.get("#success_message").should("not.be.visible");
   });
 
-  it("BMW should not be listed in the list of the cars", () => {
+  it.only("BMW should not be listed in the list of the cars", () => {
     cy.get("#cars").children().should("have.length", 4);
 
     // Check list does not contain BMW

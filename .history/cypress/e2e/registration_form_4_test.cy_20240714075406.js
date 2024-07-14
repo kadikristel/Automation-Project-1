@@ -36,7 +36,7 @@ describe("Input fields", () => {
     cy.get("#username").should("have.attr", "pattern", "[a-zA-Z0-9_]+");
   });
 
-  it("Email input should support correct pattern", () => {
+  it.only("Email input should support correct pattern", () => {
     // Check regex
     // input invalid email
     // check that email element has red border outline
@@ -57,6 +57,9 @@ describe("Input fields", () => {
     // Check that submit button is not enabled
     cy.get(".submit_button").should("be.disabled");
     cy.get("h2").contains("Password").click();
+    cy.get("#input_error_message")
+      .should("be.visible")
+      .and("contain", "Mandatory input field is not valid or empty!");
     cy.get("#success_message").should("not.be.visible");
   });
 
