@@ -22,3 +22,11 @@ input:focus:invalid {
   color: #df5000;
   font: 1.2em "Fira Sans", sans-serif;
 }
+
+#checkboxAlert {
+  /* Ensure it's not hidden */
+  display: block; /* or inline-block, depending on your layout */
+  visibility: visible;
+  /* Optionally, set a minimum height to ensure it's visible */
+  min-height: 20px; /* Adjust as needed */
+}

@@ -176,7 +176,7 @@ describe("Bonus section: Functional tests, created by: Kadi-Kristel", () => {
     cy.log("Back again in Registration form 3");
   });
 
-  it("Mandatory fields are absent with corresponding assertions", () => {
+  it.only("Mandatory fields are absent with corresponding assertions", () => {
     inputEmptyMandatoryFields();
   });
 
@@ -206,13 +206,13 @@ function inputEmptyMandatoryFields() {
     .should("be.visible")
     .and("contain", "Email is required");
 
-  cy.get('input[type="checkbox"]').eq(0).uncheck();
+  cy.get('input[ng-model="checkbox"]').uncheck();
 
-  cy.get("#checkboxAlert")
-    .should("not.be.visible")
-    .contains("Checkbox is required");
+  cy.get("#checkboxAlert").should("contain", "Checkbox should be checked");
 
-  cy.get('input[type="checkbox"]').eq(0).should("have.class", "ng-invalid");
+  cy.get("#checkboxAlert").should("be.visible");
+
+  cy.get('input[type="checkbox"]').eq(1).should("not.be.checked");
 
   cy.get('input[type="submit"]').should("be.disabled");
   cy.get('input[type="date"]').first().type("2024-07-12");

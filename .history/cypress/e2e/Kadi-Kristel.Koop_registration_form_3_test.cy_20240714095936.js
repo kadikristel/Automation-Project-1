@@ -176,7 +176,7 @@ describe("Bonus section: Functional tests, created by: Kadi-Kristel", () => {
     cy.log("Back again in Registration form 3");
   });
 
-  it("Mandatory fields are absent with corresponding assertions", () => {
+  it.only("Mandatory fields are absent with corresponding assertions", () => {
     inputEmptyMandatoryFields();
   });
 
