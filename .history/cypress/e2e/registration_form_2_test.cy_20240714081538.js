@@ -39,7 +39,6 @@ describe("Section 1: Functional tests", () => {
     cy.get("button.submit_button").click();
     cy.get("#success_message").should("be.visible");
   });
-
   it("User can submit form with all fields added", () => {
     // Add test steps for filling in ALL fields
     cy.get("#username").type("kadikristel");
@@ -62,7 +61,6 @@ describe("Section 1: Functional tests", () => {
     cy.get("#success_message").should("be.visible");
     cy.get("#success_message").should("have.css", "display", "block");
   });
-
   it("User can submit form with valid data and only mandatory fields added", () => {
     // Add test steps for filling in ONLY mandatory fields
     cy.get("#username").type("kadikristel");
@@ -103,11 +101,9 @@ describe("Section 2: Visual tests", () => {
       .should("be.lessThan", 178)
       .and("be.greaterThan", 100);
   });
-
   it("My test for second picture", () => {
     cy.log("Check logo source and size for second picture");
   });
-
   it("Check navigation part", () => {
     cy.get("nav").children().should("have.length", 2);
 

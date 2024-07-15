@@ -46,7 +46,6 @@ describe("Bonus section: Visual tests, created by: Kadi-Kristel", () => {
     cy.get("#city").select("Valencia");
     cy.get("#city").should("contain", "Valencia");
   });
-
   it("Check that radio button list is correct", () => {
     cy.get('input[type="radio"]').should("have.length", 4);
     cy.get("input[type=radio]").next().eq(0).should("have.text", "Daily");
@@ -61,7 +60,6 @@ describe("Bonus section: Visual tests, created by: Kadi-Kristel", () => {
     cy.get('input[type="radio"]').eq(3).check().should("be.checked");
     cy.get('input[type="radio"]').eq(1).should("not.be.checked");
   });
-
   it("Check that checkbox list is correct", () => {
     cy.get('input[type="checkbox"]').should("have.length", 2);
     cy.get('input[type="checkbox"]').next().eq(0).should("have.text", "");
@@ -80,7 +78,6 @@ describe("Bonus section: Visual tests, created by: Kadi-Kristel", () => {
     cy.get('input[type="checkbox"]').eq(0).should("be.checked");
     cy.get('input[type="checkbox"]').eq(1).should("be.checked");
   });
-
   it("Check that email format is correct", () => {
     cy.get('input[name="email"]').type("kadi.test.com");
     cy.get('#emailAlert span[ng-show="myForm.email.$error.email"]')
@@ -92,7 +89,6 @@ describe("Bonus section: Visual tests, created by: Kadi-Kristel", () => {
       "not.be.visible"
     );
   });
-
   it("Check that datepicker works for date of registration", () => {
     const today = new Date();
     const date = today.toISOString().split("T")[0];
@@ -100,7 +96,6 @@ describe("Bonus section: Visual tests, created by: Kadi-Kristel", () => {
     cy.get('input[type="date"]').should("have.value", date);
   });
 });
-
 /*
 BONUS TASK: add functional tests for registration form 3
 Task list:
@@ -138,7 +133,6 @@ describe("Bonus section: Functional tests, created by: Kadi-Kristel", () => {
     cy.go("back");
     cy.log("Back again in Registration form 3");
   });
-
   it("User fills only mandatory fields", () => {
     cy.get("#name").type("Kadi");
     cy.get('input[name="email"]').type("kadi@test.com");
@@ -156,12 +150,10 @@ describe("Bonus section: Functional tests, created by: Kadi-Kristel", () => {
     cy.go("back");
     cy.log("Back again in Registration form 3");
   });
-
-  it("Mandatory fields are absent with corresponding assertions", () => {
+  it.only("Mandatory fields are absent with corresponding assertions", () => {
     inputEmptyMandatoryFields();
   });
 });
-
 function inputEmptyMandatoryFields() {
   cy.log("Leaving mandatory fields empty");
   cy.get('input[name="email"]').clear().type("a").clear().blur();
