@@ -232,6 +232,7 @@ describe("Section 2: Visual tests, created by: Kadi-Kristel", () => {
     cy.get("#cars").select(1).screenshot("Cars drop-down");
     cy.screenshot("Full page screenshot");
 
+    cy.get("#cars").children().should("have.length", 4);
     cy.get("#cars").find("option").should("have.length", 4);
 
     // Check  that first element in the dropdown has text Volvo
@@ -253,6 +254,7 @@ describe("Section 2: Visual tests, created by: Kadi-Kristel", () => {
     cy.get("#animal").select(1).screenshot("Animal drop-down");
     cy.screenshot("Full page screenshot");
 
+    cy.get("#animal").children().should("have.length", 6);
     cy.get("#animal").find("option").should("have.length", 6);
 
     cy.get("#animal").find("option").eq(0).should("have.text", "Dog");

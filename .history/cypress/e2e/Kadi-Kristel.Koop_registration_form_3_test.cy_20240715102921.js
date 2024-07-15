@@ -95,7 +95,7 @@ describe("Bonus section: Visual tests, created by: Kadi-Kristel", () => {
     cy.get('input[type="checkbox"]').eq(1).should("be.checked");
   });
 
-  it("Check that email format is correct", () => {
+  it.only("Check that email format is correct", () => {
     cy.get('input[name="email"]').type("kadi.test.com");
     cy.get('#emailAlert span[ng-show="myForm.email.$error.email"]')
       .should("be.visible")

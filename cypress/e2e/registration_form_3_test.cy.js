@@ -1,3 +1,5 @@
+import "cypress-file-upload";
+
 beforeEach(() => {
   cy.visit("cypress/fixtures/registration_form_3.html");
 });
@@ -22,6 +24,7 @@ describe("Bonus section: Visual tests, created by: Kadi-Kristel", () => {
 
     // Select a country (Estonia)
     cy.get("#country").select("Estonia").should("have.value", "object:4");
+
     cy.get("#city").select("Haapsalu");
     cy.get("#city").should("contain", "Haapsalu");
 
@@ -30,6 +33,7 @@ describe("Bonus section: Visual tests, created by: Kadi-Kristel", () => {
 
     // Verify that city "Haapsalu" is removed
     cy.get("#city").find("option").should("not.contain", "Haapsalu");
+
     const expectedCityOptions = [
       "",
       "Malaga",
@@ -37,26 +41,31 @@ describe("Bonus section: Visual tests, created by: Kadi-Kristel", () => {
       "Valencia",
       "Corralejo",
     ];
+
     cy.get("#city")
       .find("option")
       .then(($options) => {
         const actualCityOptions = [...$options].map((option) => option.text);
         expect(actualCityOptions).to.deep.eq(expectedCityOptions);
       });
+
     cy.get("#city").select("Valencia");
     cy.get("#city").should("contain", "Valencia");
   });
 
   it("Check that radio button list is correct", () => {
     cy.get('input[type="radio"]').should("have.length", 4);
+
     cy.get("input[type=radio]").next().eq(0).should("have.text", "Daily");
     cy.get("input[type=radio]").next().eq(1).should("have.text", "Weekly");
     cy.get("input[type=radio]").next().eq(2).should("have.text", "Monthly");
     cy.get("input[type=radio]").next().eq(3).should("have.text", "Never");
+
     cy.get('input[type="radio"]').eq(0).should("not.be.checked");
     cy.get('input[type="radio"]').eq(1).should("not.be.checked");
     cy.get('input[type="radio"]').eq(2).should("not.be.checked");
     cy.get('input[type="radio"]').eq(3).should("not.be.checked");
+
     cy.get('input[type="radio"]').eq(1).check().should("be.checked");
     cy.get('input[type="radio"]').eq(3).check().should("be.checked");
     cy.get('input[type="radio"]').eq(1).should("not.be.checked");
@@ -64,19 +73,24 @@ describe("Bonus section: Visual tests, created by: Kadi-Kristel", () => {
 
   it("Check that checkbox list is correct", () => {
     cy.get('input[type="checkbox"]').should("have.length", 2);
+
     cy.get('input[type="checkbox"]').next().eq(0).should("have.text", "");
     cy.get('input[type="checkbox"]')
       .next()
       .eq(1)
       .should("have.text", "Accept our cookie policy");
+
     cy.get('input[type="checkbox"]').eq(0).should("not.be.checked");
     cy.get('input[type="checkbox"]').eq(1).should("not.be.checked");
+
     cy.get('input[type="checkbox"]').eq(0).check().should("be.checked");
     cy.get('input[type="checkbox"]').eq(1).check().should("be.checked");
+
     cy.get('button a[href="cookiePolicy.html"]').click();
     cy.url().should("include", "cookiePolicy.html");
     cy.go("back");
     cy.url().should("not.include", "cookiePolicy.html");
+
     cy.get('input[type="checkbox"]').eq(0).should("be.checked");
     cy.get('input[type="checkbox"]').eq(1).should("be.checked");
   });
@@ -86,6 +100,7 @@ describe("Bonus section: Visual tests, created by: Kadi-Kristel", () => {
     cy.get('#emailAlert span[ng-show="myForm.email.$error.email"]')
       .should("be.visible")
       .and("contain", "Invalid email address");
+    cy.get('input[type="submit"]').should("be.disabled");
     cy.get('input[name="email"]').clear();
     cy.get('input[name="email"]').type("kadi@test.com");
     cy.get('#emailAlert span[ng-show="myForm.email.$error.email"]').should(
@@ -100,7 +115,6 @@ describe("Bonus section: Visual tests, created by: Kadi-Kristel", () => {
     cy.get('input[type="date"]').should("have.value", date);
   });
 });
-
 /*
 BONUS TASK: add functional tests for registration form 3
 Task list:
@@ -124,9 +138,12 @@ describe("Bonus section: Functional tests, created by: Kadi-Kristel", () => {
 
     // After submitting the form, city dropdown seems to be broken. It doesn't display Salzburg anymore (all the other fields are still filled)
     cy.get("#city").select("Salzburg").should("contain", "Salzburg");
+
     cy.get('input[type="date"]').first().type("2024-07-12");
     cy.get('input[type="radio"]').check("Monthly");
-    cy.get("#birthday").type("1995-03-29");
+    cy.get("#birthday").type(randomBirthday);
+    cy.get('input[type="checkbox"]').eq(0).check();
+    cy.get('input[type="checkbox"]').eq(0).should("be.checked");
     cy.get('input[type="checkbox"]').eq(1).check();
     cy.get('input[type="checkbox"]').eq(1).should("be.checked");
     cy.get("#checkboxAlert").should("not.be.visible");
@@ -134,6 +151,7 @@ describe("Bonus section: Functional tests, created by: Kadi-Kristel", () => {
     // Uploading a file
     const fileName = "example_file_form3";
     cy.get("#myFile").attachFile(fileName);
+
     cy.get('button[type="submit"]').click();
     cy.go("back");
     cy.log("Back again in Registration form 3");
@@ -160,6 +178,18 @@ describe("Bonus section: Functional tests, created by: Kadi-Kristel", () => {
   it("Mandatory fields are absent with corresponding assertions", () => {
     inputEmptyMandatoryFields();
   });
+
+  it("Uploading a file", () => {
+    const fileName = "example_file_form3";
+    cy.visit("/cypress/fixtures/registration_form_3.html");
+    cy.get("#myFile").attachFile(fileName);
+    cy.get("button[type='submit']").should("contain", "Submit file").click();
+    cy.url().should("include", "filename=example_file_form3");
+    cy.go("back");
+    cy.url().should("include", "registration_form_3.html");
+    cy.get("#myFile").should("have.value", "");
+    cy.log("Back again in Registration form 3");
+  });
 });
 
 function inputEmptyMandatoryFields() {
@@ -174,13 +204,37 @@ function inputEmptyMandatoryFields() {
   cy.get("div#emailAlert span[ng-show='myForm.email.$error.required']")
     .should("be.visible")
     .and("contain", "Email is required");
-  cy.get('input[ng-model="checkbox"]').uncheck();
-  cy.contains("#checkboxAlert", "Checkbox is required").should(
-    "not.be.visible"
-  );
-  cy.get('input[type="checkbox"]').eq(1).should("not.be.checked");
+
+  cy.get('input[type="checkbox"]').eq(0).uncheck();
+
+  cy.get("#checkboxAlert")
+    .should("not.be.visible")
+    .contains("Checkbox is required");
+
+  cy.get('input[type="checkbox"]').eq(0).should("have.class", "ng-invalid");
+
   cy.get('input[type="submit"]').should("be.disabled");
   cy.get('input[type="date"]').first().type("2024-07-12");
+
   const fileName = "example_file_form3";
   cy.get("#myFile").attachFile(fileName);
+}
+
+// BIRTHDAY variable and function:
+const randomBirthday = getRandomBirthday(1, 100); // Random birthday for someone between 1 and 100 years old
+console.log(randomBirthday);
+
+function getRandomBirthday(minAge, maxAge) {
+  const today = new Date();
+  const currentYear = today.getFullYear();
+  const randomYear =
+    currentYear - Math.floor(Math.random() * (maxAge - minAge + 1) + minAge);
+  const randomMonth = Math.floor(Math.random() * 12);
+  const randomDay =
+    Math.floor(
+      Math.random() * new Date(randomYear, randomMonth + 1, 0).getDate()
+    ) + 1;
+  const randomBirthday = new Date(randomYear, randomMonth, randomDay);
+  const formattedBirthday = randomBirthday.toISOString().split("T")[0];
+  return formattedBirthday;
 }
