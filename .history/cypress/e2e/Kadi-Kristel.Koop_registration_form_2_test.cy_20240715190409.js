@@ -64,7 +64,7 @@ describe("Section 1: Functional tests, created by: Kadi-Kristel", () => {
     cy.get("#success_message").should("have.css", "display", "block");
   });
 
-  it("User can submit form with valid data and only mandatory fields added", () => {
+  it.only("User can submit form with valid data and only mandatory fields added", () => {
     inputValidData("johnDoe");
     cy.get("button.submit_button").should("be.enabled").click();
     cy.get("#input_error_message").should("not.be.visible");
@@ -175,11 +175,13 @@ describe("Section 2: Visual tests, created by: Kadi-Kristel", () => {
       .should("have.text", "JavaScript");
     cy.get('input[type="radio"]').next().eq(3).should("have.text", "PHP");
 
+    //Verify default state of radio buttons
     cy.get('input[type="radio"]').eq(0).should("not.be.checked");
     cy.get('input[type="radio"]').eq(1).should("not.be.checked");
     cy.get('input[type="radio"]').eq(2).should("not.be.checked");
     cy.get('input[type="radio"]').eq(3).should("not.be.checked");
 
+    // Selecting one will remove selection from the other radio button
     cy.get('input[type="radio"]').eq(0).check().should("be.checked");
     cy.get('input[type="radio"]').eq(1).check().should("be.checked");
     cy.get('input[type="radio"]').eq(0).should("not.be.checked");
@@ -218,6 +220,7 @@ describe("Section 2: Visual tests, created by: Kadi-Kristel", () => {
 
     cy.get("#cars").find("option").should("have.length", 4);
 
+    // Check  that first element in the dropdown has text Volvo
     cy.get("#cars").find("option").eq(0).should("have.text", "Volvo");
     cy.get("#cars").find("option").eq(1).should("have.text", "Saab");
     cy.get("#cars").find("option").eq(2).should("have.text", "Opel");
@@ -238,6 +241,14 @@ describe("Section 2: Visual tests, created by: Kadi-Kristel", () => {
 
     cy.get("#animal").find("option").should("have.length", 6);
 
+    cy.get("#animal").find("option").eq(0).should("have.text", "Dog");
+    cy.get("#animal").find("option").eq(1).should("have.text", "Cat");
+    cy.get("#animal").find("option").eq(2).should("have.text", "Snake");
+    cy.get("#animal").find("option").eq(3).should("have.text", "Hippo");
+    cy.get("#animal").find("option").eq(4).should("have.text", "Cow");
+    cy.get("#animal").find("option").eq(5).should("have.text", "Horse");
+
+    // Advanced level how to check the content of the Animal dropdown
     cy.get("#animal")
       .find("option")
       .then((options) => {
