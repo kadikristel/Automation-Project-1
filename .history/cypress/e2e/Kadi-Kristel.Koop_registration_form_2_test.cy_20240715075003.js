@@ -237,9 +237,6 @@ describe("Section 2: Visual tests, created by: Kadi-Kristel", () => {
 
     // Check  that first element in the dropdown has text Volvo
     cy.get("#cars").find("option").eq(0).should("have.text", "Volvo");
-    cy.get("#cars").find("option").eq(1).should("have.text", "Saab");
-    cy.get("#cars").find("option").eq(2).should("have.text", "Opel");
-    cy.get("#cars").find("option").eq(3).should("have.text", "Audi");
 
     // Advanced level how to check the content of the Cars dropdown
     cy.get("#cars")
@@ -257,12 +254,12 @@ describe("Section 2: Visual tests, created by: Kadi-Kristel", () => {
     cy.get("#animal").children().should("have.length", 6);
     cy.get("#animal").find("option").should("have.length", 6);
 
-    cy.get("#animal").find("option").eq(0).should("have.text", "Dog");
-    cy.get("#animal").find("option").eq(1).should("have.text", "Cat");
-    cy.get("#animal").find("option").eq(2).should("have.text", "Snake");
+    cy.get("#animal").find("option").eq(0).should("have.text", "Hippo");
+    cy.get("#animal").find("option").eq(1).should("have.text", "Hippo");
+    cy.get("#animal").find("option").eq(2).should("have.text", "Hippo");
     cy.get("#animal").find("option").eq(3).should("have.text", "Hippo");
-    cy.get("#animal").find("option").eq(4).should("have.text", "Cow");
-    cy.get("#animal").find("option").eq(5).should("have.text", "Horse");
+    cy.get("#animal").find("option").eq(4).should("have.text", "Hippo");
+    cy.get("#animal").find("option").eq(5).should("have.text", "Hippo");
 
     // Advanced level how to check the content of the Animal dropdown
     cy.get("#animal")

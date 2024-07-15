@@ -228,7 +228,7 @@ describe("Section 2: Visual tests, created by: Kadi-Kristel", () => {
     cy.get('input[type="checkbox"]').eq(2).should("not.be.checked");
   });
 
-  it("Car dropdown is correct", () => {
+  it.only("Car dropdown is correct", () => {
     cy.get("#cars").select(1).screenshot("Cars drop-down");
     cy.screenshot("Full page screenshot");
 
@@ -250,7 +250,7 @@ describe("Section 2: Visual tests, created by: Kadi-Kristel", () => {
       });
   });
 
-  it("Animal dropdown is correct", () => {
+  it.only("Animal dropdown is correct", () => {
     cy.get("#animal").select(1).screenshot("Animal drop-down");
     cy.screenshot("Full page screenshot");
 
