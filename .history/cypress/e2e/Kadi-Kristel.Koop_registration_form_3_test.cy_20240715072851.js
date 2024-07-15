@@ -128,7 +128,7 @@ Task list:
  */
 
 describe("Bonus section: Functional tests, created by: Kadi-Kristel", () => {
-  it.only("User can submit form with all fields valid", () => {
+  it("User can submit form with all fields valid", () => {
     cy.get("#name").type("Kadi");
     cy.get('input[name="email"]').type("kadi@test.com");
     cy.get('#emailAlert span[ng-show="myForm.email.$error.email"]').should(

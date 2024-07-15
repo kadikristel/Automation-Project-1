@@ -107,6 +107,7 @@ describe("Section 1: Functional tests, created by: Kadi-Kristel", () => {
     cy.get("#input_error_message")
       .should("be.visible")
       .should("contain", "Mandatory input field is not valid or empty!");
+    cy.get("#success_message").should("not.be.visible");
   });
 });
 
