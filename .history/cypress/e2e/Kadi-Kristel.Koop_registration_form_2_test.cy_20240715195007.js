@@ -65,7 +65,7 @@ describe("Section 1: Functional tests, created by: Kadi-Kristel", () => {
   });
 
   it("User can submit form with valid data and only mandatory fields added", () => {
-    inputValidData("kadikristel");
+    inputValidData("johnDoe");
     cy.get("button.submit_button").should("be.enabled").click();
     cy.get("#input_error_message").should("not.be.visible");
     cy.get("#password_error_message").should("have.css", "display", "none");
@@ -76,10 +76,18 @@ describe("Section 1: Functional tests, created by: Kadi-Kristel", () => {
   });
 
   it("User cannot submit the form when email is not added", () => {
-    inputValidData("kadikristel");
+    cy.get("#username").type("kadikristel");
+    cy.get("#email").type("kadi@test.com");
+    cy.get('[data-cy="name"]').type("Kadi");
+    cy.get("#lastName").type("Koop");
+    cy.get('[data-testid="phoneNumberTestId"]').type("555666777");
+    cy.get("#password").type("Password123");
+    cy.get("#confirm").type("Password123");
+
     cy.get("#email").scrollIntoView();
     cy.get("#email").clear();
     cy.get("h2").contains("Password").click();
+
     cy.get(".submit_button").should("be.disabled");
     cy.get("#success_message").should("not.be.visible");
     cy.get("#input_error_message")
@@ -249,10 +257,10 @@ describe("Section 2: Visual tests, created by: Kadi-Kristel", () => {
 function inputValidData(username) {
   cy.log("Username will be filled");
   cy.get('input[data-testid="user"]').type(username);
-  cy.get("#email").type("kadi@test.com");
-  cy.get('[data-cy="name"]').type("Kadi");
-  cy.get("#lastName").type("Koop");
-  cy.get('[data-testid="phoneNumberTestId"]').type("555666777");
+  cy.get("#email").type("validemail@yeap.com");
+  cy.get('[data-cy="name"]').type("John");
+  cy.get("#lastName").type("Doe");
+  cy.get('[data-testid="phoneNumberTestId"]').type("10203040");
   cy.get("#password").type("MyPass");
   cy.get("#confirm").type("MyPass");
   cy.get("h2").contains("Password").click();

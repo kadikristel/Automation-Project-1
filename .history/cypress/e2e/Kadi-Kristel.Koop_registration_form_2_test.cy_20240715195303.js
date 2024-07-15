@@ -65,7 +65,7 @@ describe("Section 1: Functional tests, created by: Kadi-Kristel", () => {
   });
 
   it("User can submit form with valid data and only mandatory fields added", () => {
-    inputValidData("kadikristel");
+    inputValidData("johnDoe");
     cy.get("button.submit_button").should("be.enabled").click();
     cy.get("#input_error_message").should("not.be.visible");
     cy.get("#password_error_message").should("have.css", "display", "none");
@@ -75,8 +75,8 @@ describe("Section 1: Functional tests, created by: Kadi-Kristel", () => {
     cy.get("#success_message").should("have.css", "display", "block");
   });
 
-  it("User cannot submit the form when email is not added", () => {
-    inputValidData("kadikristel");
+  it.only("User cannot submit the form when email is not added", () => {
+    inputValidData("johnDoe");
     cy.get("#email").scrollIntoView();
     cy.get("#email").clear();
     cy.get("h2").contains("Password").click();
@@ -252,7 +252,7 @@ function inputValidData(username) {
   cy.get("#email").type("kadi@test.com");
   cy.get('[data-cy="name"]').type("Kadi");
   cy.get("#lastName").type("Koop");
-  cy.get('[data-testid="phoneNumberTestId"]').type("555666777");
+  cy.get('[data-testid="phoneNumberTestId"]').type("10203040");
   cy.get("#password").type("MyPass");
   cy.get("#confirm").type("MyPass");
   cy.get("h2").contains("Password").click();
