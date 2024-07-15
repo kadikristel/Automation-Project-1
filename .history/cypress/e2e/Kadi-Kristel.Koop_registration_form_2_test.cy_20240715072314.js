@@ -5,7 +5,7 @@ beforeEach(() => {
 });
 
 describe("Section 1: Functional tests, created by: Kadi-Kristel", () => {
-  it("User can use only same both first and validation passwords", () => {
+  it.only("User can use only same both first and validation passwords", () => {
     cy.get("#username").type("kadikristel");
     cy.get("#email").type("kadi@test.com");
     cy.get('[data-cy="name"]').type("Kadi");
@@ -89,7 +89,7 @@ describe("Section 1: Functional tests, created by: Kadi-Kristel", () => {
     inputValidData("johnDoe");
   });
 
-  it.only("User cannot submit the form when email is not added", () => {
+  it("User cannot submit the form when email is not added", () => {
     cy.get("#username").type("kadikristel");
     cy.get("#email").type("kadi@test.com");
     cy.get('[data-cy="name"]').type("Kadi");

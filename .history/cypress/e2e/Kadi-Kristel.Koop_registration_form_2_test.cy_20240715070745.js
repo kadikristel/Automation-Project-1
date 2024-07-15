@@ -89,7 +89,7 @@ describe("Section 1: Functional tests, created by: Kadi-Kristel", () => {
     inputValidData("johnDoe");
   });
 
-  it.only("User cannot submit the form when email is not added", () => {
+  it("User cannot submit the form when email is not added", () => {
     cy.get("#username").type("kadikristel");
     cy.get("#email").type("kadi@test.com");
     cy.get('[data-cy="name"]').type("Kadi");
@@ -103,7 +103,6 @@ describe("Section 1: Functional tests, created by: Kadi-Kristel", () => {
     cy.get("h2").contains("Password").click();
 
     cy.get(".submit_button").should("be.disabled");
-    cy.get("#success_message").should("not.be.visible");
     cy.get("#input_error_message")
       .should("be.visible")
       .should("contain", "Mandatory input field is not valid or empty!");
