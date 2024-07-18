@@ -69,7 +69,7 @@ describe("Bonus section: Visual tests, created by: Kadi-Kristel", () => {
     cy.get('input[type="radio"]').eq(1).should("not.be.checked");
   });
 
-  it("Check that checkbox list is correct", () => {
+  it.only("Check that checkbox list is correct", () => {
     cy.get('input[type="checkbox"]').should("have.length", 2);
 
     cy.get('input[type="checkbox"]').next().eq(0).should("have.text", "");

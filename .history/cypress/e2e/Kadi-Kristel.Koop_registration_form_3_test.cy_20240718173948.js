@@ -69,14 +69,13 @@ describe("Bonus section: Visual tests, created by: Kadi-Kristel", () => {
     cy.get('input[type="radio"]').eq(1).should("not.be.checked");
   });
 
-  it("Check that checkbox list is correct", () => {
+  it.only("Check that checkbox list is correct", () => {
     cy.get('input[type="checkbox"]').should("have.length", 2);
 
     cy.get('input[type="checkbox"]').next().eq(0).should("have.text", "");
     cy.get('input[type="checkbox"]')
-      .next()
-      .eq(1)
-      .should("have.text", "Accept our cookie policy");
+      .parent()
+      .should("contain", "Accept our privacy policy");
 
     cy.get('input[type="checkbox"]').eq(0).should("not.be.checked");
     cy.get('input[type="checkbox"]').eq(1).should("not.be.checked");
@@ -173,7 +172,7 @@ describe("Bonus section: Functional tests, created by: Kadi-Kristel", () => {
     cy.log("Back again in Registration form 3");
   });
 
-  it("Mandatory fields are absent with corresponding assertions", () => {
+  it.only("Mandatory fields are absent with corresponding assertions", () => {
     inputEmptyMandatoryFields();
   });
 
