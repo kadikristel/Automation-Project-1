@@ -1,5 +1,3 @@
-const exp = require("constants");
-
 beforeEach(() => {
   cy.visit("cypress/fixtures/registration_form_2.html");
 });
